@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import ReactDOM from "react-dom/client";
+import React from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    class Link extends React.Component {
+        render() {
+            return React.createElement(
+                'p',
+                null,
+                React.createElement(
+                    'a',
+                    {href: this.props.url},
+                    this.props.children));
+        }
+    }
+
+    const boldReact =
+        React.createElement('strong', null, 'React');
+
+    const linkReact =
+        React.createElement(Link, {url: '//react.dev'}, boldReact);
+    const linkVue =
+        React.createElement(Link, {url: '//vuejs.org'}, 'Vue');
+    const linkAngular =
+        React.createElement(Link, {url: '//angular.io'}, 'Angular');
+    const group = React.createElement(React.Fragment, null, linkReact, linkVue, linkAngular);
+    const domElement = document.getElementById('root');
+    ReactDOM.createRoot(domElement).render(group);
 }
 
 export default App;
